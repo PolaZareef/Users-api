@@ -1,10 +1,13 @@
 var express = require('express');
+const cors = require('cors'); 
+
 const sequelize=require('./database');
 const User=require('./User');
 
 sequelize.sync().then(()=>console.log('db is ready'));
 var app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get('/users',async (req,res)=>{
   const users=await User.findAll();
